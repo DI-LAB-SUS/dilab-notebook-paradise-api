@@ -40,3 +40,18 @@
 ## 解決的錯誤
 
 - Fastify-OAuth2，原本一直出現 Invalid State Error 500，最後根據這篇論壇對話找出解方：[fastify_oauth2_invalid_state_500.pdf](./documents/fixed_errors_note/fastify_oauth2_invalid_state_500.pdf)。
+
+---
+
+## TODO
+
+- 改用 S3 Storage 存取使用者筆記，取代傳統資料夾存取（可以研究看看 Supabase 的 S3 Storage 支援）。
+- OAuth2 登入後建立 Token，建立在 Redis 儲存，並且加入 HttpOnly Cookies。
+- 遷移舊 Flask 版的上傳功能。
+- 篩選只有限定使用者的 GitHub 帳號可以登入。
+- 實驗如果 Token 過期了會發生什麼事。
+- 設計更好的 Foreign Keys 規則去連接使用者帳號跟上傳筆記。
+- 將 Supabase 的使用者 ID 跟 Redis 的使用者 ID 整合為一。
+- 在 Supabase 建立 enum type 取代字串去儲存使用者的帳號類型（default, github）。
+- 確認避免使用者上傳的資料夾中有重複資料夾名。
+- 儲存檔案，不只到 backup 資料夾，也儲存 + 解壓縮到主要儲存夾。
