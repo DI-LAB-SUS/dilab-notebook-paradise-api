@@ -1,0 +1,88 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.0.3 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36" version="26.0.3">
+  <diagram name="Page-1" id="kbYW_cTcSt5igkZ9MaPK">
+    <mxGraphModel dx="1038" dy="704" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="239.9999999999999" as="sourcePoint" />
+            <mxPoint x="350" y="239.9999999999999" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-1" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;使用者用網頁前端技術（HTML, CSS, JS, React, Vue, Angular）設計筆記&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="70" y="210" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Pm6COeQHGEXDcWi_QtiT-2" target="Pm6COeQHGEXDcWi_QtiT-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-2" value="上傳到讀書天堂" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="340" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-4" value="第一代：上傳壓縮檔&lt;div&gt;第二代：可以連結 GitHub 專案&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="329" y="160" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="Pm6COeQHGEXDcWi_QtiT-5" target="Pm6COeQHGEXDcWi_QtiT-8" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-5" value="&lt;div&gt;為網站設定標題、文字敘述、加入所有相關的 GitHub 專案連結&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-8" value="&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;存在在筆記本天堂網站上，變成標題、有文字敘述的 Card&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="Pm6COeQHGEXDcWi_QtiT-10" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="290" y="310" />
+              <mxPoint x="290" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-10" value="&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;使用者用 LaTex 設計筆記&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="70" y="280" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="Pm6COeQHGEXDcWi_QtiT-11" target="Pm6COeQHGEXDcWi_QtiT-2" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-11" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;使用者用 Markdown 設計筆記&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="1" vertex="1">
+          <mxGeometry x="70" y="140" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="1" source="Pm6COeQHGEXDcWi_QtiT-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="240" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="290" y="380" />
+              <mxPoint x="290" y="240" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-12" value="&lt;div style=&quot;text-align: justify;&quot;&gt;&lt;span style=&quot;text-align: left;&quot;&gt;使用者用 Word 設計筆記&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="70" y="350" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-13" value="自由度最高" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.star;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="10" y="215" width="50" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-18" value="&lt;div style=&quot;text-align: justify;&quot;&gt;按下 Card 就能跳入筆記內容&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="510" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-19" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;網頁前端&lt;/h1&gt;&lt;p&gt;React.js + TypeScript&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="180" y="610" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-20" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;網頁後端&lt;/h1&gt;&lt;p&gt;Python Flask&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="110" y="530" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-21" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;資料庫 (BaaS)&lt;/h1&gt;&lt;p&gt;SupaBase&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="260" y="530" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Pm6COeQHGEXDcWi_QtiT-23" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 31px;&quot;&gt;開發此系統的架構&lt;/font&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fff2cc;strokeColor=#d6b656;" parent="1" vertex="1">
+          <mxGeometry x="220" y="465" width="250" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="SpWsYjNpLK0Ad7Y5f-va-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;登入&lt;/h1&gt;&lt;p&gt;使用 JWT（HttpOnly）Token作為登入方式，後端不留紀錄所不使用 Session。&lt;/p&gt;&lt;p&gt;加入 GitHub OAuth 作為登入選項之一（只有讀書會的成員可以用 GitHub 登入）。&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="460" y="540" width="180" height="160" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
