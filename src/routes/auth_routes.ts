@@ -1,5 +1,11 @@
 import fastify, {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
-import {cacheUser, generateUserJWT, getGitHubUserFromTable, getUserFromCache} from "../utils/auth_utils";
+import {
+    cacheUser,
+    clearUserCache,
+    generateUserJWT,
+    getGitHubUserFromTable,
+    getUserFromCache
+} from "../utils/auth_utils";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -70,11 +76,16 @@ export default async function authRoutes(fastify: FastifyInstance, options: any)
         }
     });
 
-    fastify.get('/user', { preValidation: [fastify.authenticate] }, async function(request: FastifyRequest, reply: FastifyReply) {
-        if (!request.user) {
-            return reply.status(401).send({ error: "Unauthorized" });
-        }
+    fastify.get('/logout', { preValidation: [fastify.authenticate] }, async function(request: FastifyRequest, reply: FastifyReply) {
+        const userID = (request.user as any).user_id;
 
+        await clearUserCache(fastify, userID);
+
+        reply.clearCookie('token', {path: '/'})
+            .send({"message": "Logged out"});
+    });
+
+    fastify.get('/user', { preValidation: [fastify.authenticate] }, async function(request: FastifyRequest, reply: FastifyReply) {
         const userFromDB = await getUserFromCache(fastify, (request.user as any).user_id);
         if (!userFromDB) {
             return reply.status(400).send({ error: "User missing in system." });

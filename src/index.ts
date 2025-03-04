@@ -69,7 +69,6 @@ fastify.decorate("authenticate", async function(request: FastifyRequest, reply: 
 
         request.user = fastify.jwt.verify(token); // Attach decoded user to request.
     } catch (err) {
-        console.error(err);
         reply.status(401).send({ error: "Unauthorized" });
     }
 });

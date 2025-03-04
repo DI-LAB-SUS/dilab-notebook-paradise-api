@@ -47,6 +47,10 @@ export async function cacheUser(fastify: FastifyInstance, userFromDB: any, expir
     );
 }
 
+export async function clearUserCache(fastify: FastifyInstance, userID: number) {
+    await fastify.redis.del(`ID:${userID}`);
+}
+
 /**
  *
  * @param fastify
