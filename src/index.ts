@@ -1,10 +1,11 @@
-import Fastify from 'fastify';
+import Fastify, {FastifyReply, FastifyRequest} from 'fastify';
 import fastifyCookie from '@fastify/cookie';
 import fastifyJWT from '@fastify/jwt';
 import authRoutes from './routes/auth_routes';
 import dotenv from 'dotenv';
 import {fastifyOauth2} from "@fastify/oauth2";
 import fastifyCors from "@fastify/cors";
+import fastifyRedis from "@fastify/redis";
 
 dotenv.config(); // Load environment variables from .env file.
 
@@ -21,7 +22,7 @@ fastify.register(fastifyCookie); // Register Cookie Plugin
  * This application uses HttpOnly Cookies for JWT authentication. Therefore, CORs need to be extra explicitly set like this.
  */
 fastify.register(fastifyCors, {
-    origin: process.env.FRONT_APP_BASE_URL!,
+    origin: [process.env.FRONT_APP_BASE_URL!],
     credentials: true,
 });
 
@@ -34,6 +35,11 @@ fastify.register(fastifyJWT, { // Register JWT Plugin
         algorithms: [JWT_ALGORITHM as any]
     }
 });
+
+fastify.register(fastifyRedis, {
+    host: process.env.REDIS_HOST!,
+    port: Number(process.env.REDIS_PORT!),
+})
 
 fastify.register(fastifyOauth2, {
     name: 'githubOAuth2',
@@ -53,20 +59,34 @@ fastify.register(fastifyOauth2, {
     }
 });
 
-fastify.register(authRoutes, {prefix: '/auth'});
+/**
+ * Global middleware to use when a route needs authorization protection through JWT token.
+ */
+fastify.decorate("authenticate", async function(request: FastifyRequest, reply: FastifyReply) {
+    try {
+        const token = request.cookies.token;
+        if (!token) throw new Error("No token found");
 
+        request.user = fastify.jwt.verify(token); // Attach decoded user to request.
+    } catch (err) {
+        console.error(err);
+        reply.status(401).send({ error: "Unauthorized" });
+    }
+});
+
+fastify.register(authRoutes, {prefix: '/auth'});
 
 fastify.get('/hello-world', async (request, reply) => {
     return 'Hello, world!';
 });
 
-// Protected Route Example
-fastify.get('/protected', async (request, reply) => {
-    if (!request.user) {
-        return reply.status(401).send({ error: 'Unauthorized' });
-    }
-    return { message: 'Access granted', user: request.user };
-});
+// // Protected Route Example
+// fastify.get('/protected', async (request, reply) => {
+//     if (!request.user) {
+//         return reply.status(401).send({ error: 'Unauthorized' });
+//     }
+//     return { message: 'Access granted', user: request.user };
+// });
 
 const start = async () => {
     try {

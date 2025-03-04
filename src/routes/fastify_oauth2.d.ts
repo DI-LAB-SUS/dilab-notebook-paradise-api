@@ -9,7 +9,7 @@ declare module 'fastify' {
         githubOAuth2: {
             generateAuthorizationUri: () => string;
             getAccessTokenFromAuthorizationCodeFlow: (FastifyRequest) => any;
-            // You can add other methods or properties provided by the plugin as needed.
-        }
+        },
+        authenticate: (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
     }
 }

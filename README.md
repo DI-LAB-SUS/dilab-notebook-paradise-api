@@ -46,7 +46,7 @@
 ## TODO
 
 - 改用 S3 Storage 存取使用者筆記，取代傳統資料夾存取（可以研究看看 Supabase 的 S3 Storage 支援）。
-- OAuth2 登入後建立 Token，建立在 Redis 儲存，並且加入 HttpOnly Cookies。
+- ~~OAuth2 登入後建立 Token，建立在 Redis 儲存，並且加入 HttpOnly Cookies。~~
 - 遷移舊 Flask 版的上傳功能。
 - 篩選只有限定使用者的 GitHub 帳號可以登入。
 - 實驗如果 Token 過期了會發生什麼事。

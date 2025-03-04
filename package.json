@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node dist/index.js"
+    "start": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,7 @@
     "@fastify/jwt": "^9.0.4",
     "@fastify/oauth2": "^8.1.2",
     "@fastify/redis": "^7.0.2",
+    "@supabase/supabase-js": "^2.49.1",
     "dotenv": "^16.4.7",
     "fastify": "^5.2.1",
     "fastify-plugin": "^5.0.1",
@@ -23,7 +24,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.13.8",
+    "concurrently": "^9.1.2",
     "copyfiles": "^2.4.1",
+    "nodemon": "^3.1.9",
     "typescript": "^5.8.2"
   }
 }
