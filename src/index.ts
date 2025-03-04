@@ -12,7 +12,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'your_secret_key';
 const JWT_ALGORITHM = process.env.JWT_ALGORITHM || 'HS256';
 
 const fastify = Fastify({
-    logger: true
+    // logger: true
 });
 
 fastify.register(fastifyCookie); // Register Cookie Plugin
