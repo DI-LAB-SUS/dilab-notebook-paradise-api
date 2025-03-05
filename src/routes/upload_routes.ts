@@ -3,18 +3,17 @@ import fastifyMultipart, {Multipart, MultipartValue} from '@fastify/multipart';
 import * as fs from "node:fs";
 import path from "node:path";
 import {supabase} from "../global/supabase_client";
-import {pipeline} from "node:stream";
+import util from 'util';
+import dayjs from "dayjs";
+import sanitizeFilename from 'sanitize-filename';
+import { pipeline } from 'stream';
+import {PipelineSource, Readable} from "node:stream";
 
-// declare module 'fastify' {
-//     interface FastifyReply {
-//         /**
-//          * Decorated reply function.
-//          * @param filePath
-//          */
-//         sendFile: (filePath: string) => FastifyReply;
-//     }
-// }
 
+const ALLOWED_COMPRESSION_EXTENSIONS = ['zip'];
+const ALLOWED_IMAGE_EXTENSIONS = ['png', 'jpg', 'jpeg', 'gif'];
+
+const pipelineAsync = util.promisify(pipeline);
 
 export default async function uploadRoutes(fastify: FastifyInstance, options: any) {
     /**
@@ -78,13 +77,65 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
      * POST route to handle webpage note uploads.
      */
     fastify.post('/webpage-note', async (request, reply) => {
-        const formData = await request.formData();
+        try {
+            const formData = await request.formData();
 
-        const title = formData.get('title');
-        const desc = formData.get('desc');
+            console.log(formData);
 
-        console.log(title);
-        console.log(desc);
+            const title = formData.get('title');
+            const desc = formData.get('desc');
+            const file = formData.get('file') as File | null;
+            const image = formData.get('image') as File | null;
+
+            console.log(file);
+            console.log(image);
+
+            if (!title || !desc) {
+                reply.code(400).send({ message: '請填完標題與描述。' });
+                return;
+            }
+            if (!file) {
+                reply.code(400).send({ message: '請上傳檔案。' });
+                return;
+            }
+            if (!file.name || file.name === '') {
+                reply.code(400).send({ message: '沒有選擇檔案。' });
+                return;
+            }
+            if (!allowedFile(file.name, ALLOWED_COMPRESSION_EXTENSIONS)) {
+                reply.code(400).send({ message: '不允許的檔案格式。' });
+                return;
+            }
+
+            console.log(`User uploaded new note: ${title}`);
+
+            const USER_WEBPAGE_NOTE_UPLOAD_SAVE_PATH = process.env.USER_WEBPAGE_NOTE_UPLOAD_SAVE_PATH!;
+            const USER_UPLOAD_BACKUP_PATH = process.env.USER_UPLOAD_BACKUP_PATH!;
+
+            await fs.promises.mkdir(USER_WEBPAGE_NOTE_UPLOAD_SAVE_PATH, { recursive: true });
+            await fs.promises.mkdir(USER_UPLOAD_BACKUP_PATH, { recursive: true });
+
+            // Create a unique timestamp string.
+            const timestamp = dayjs().format('YYYYMMDDHHmmssSSS');
+            const uploadTimestampBackupPath = path.join(USER_UPLOAD_BACKUP_PATH, timestamp);
+            await fs.promises.mkdir(uploadTimestampBackupPath, { recursive: true });
+
+            const filenameSecured = sanitizeFilename(file.name);
+            const backupFilePath = path.join(uploadTimestampBackupPath, filenameSecured);
+
+            // Backup the compressed file. Prevent saving massive data by using chunks through Pipeline.
+            const fileStream = Readable.from(Buffer.from(await file.arrayBuffer()));
+            await pipelineAsync(fileStream, fs.createWriteStream(backupFilePath));
+
+        } catch (error) {
+            console.error(error);
+            reply.status(500).send({success: false, message: "Failed to upload."});
+        }
+
+        // Backup the compressed file.
+        // const filenameSecured = sanitize(filePart.filename);
+        // const backupFilePath = path.join(uploadTimestampBackupPath, filenameSecured);
+        // await pumpPromise(filePart.file, fs.createWriteStream(backupFilePath));
 
         // // Validate that the main file was provided.
         // if (!filePart) {
