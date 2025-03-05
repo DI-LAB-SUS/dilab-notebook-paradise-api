@@ -6,6 +6,9 @@ import dotenv from 'dotenv';
 import {fastifyOauth2} from "@fastify/oauth2";
 import fastifyCors from "@fastify/cors";
 import fastifyRedis from "@fastify/redis";
+import fastifyStatic from "@fastify/static";
+import uploadRoutes from "./routes/upload_routes";
+import path from "node:path";
 
 dotenv.config(); // Load environment variables from .env file.
 
@@ -14,6 +17,16 @@ const JWT_ALGORITHM = process.env.JWT_ALGORITHM || 'HS256';
 
 const fastify = Fastify({
     // logger: true
+});
+
+/**
+ * For serving static files as fast as possible.
+ * This must be registered for reply.sendFile() to work in routes.
+ */
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public'),
+    prefix: '/', // optional: default '/'
+    constraints: {  } // optional: default {}
 });
 
 fastify.register(fastifyCookie); // Register Cookie Plugin
@@ -74,6 +87,7 @@ fastify.decorate("authenticate", async function(request: FastifyRequest, reply: 
 });
 
 fastify.register(authRoutes, {prefix: '/auth'});
+fastify.register(uploadRoutes, {prefix: '/upload'});
 
 fastify.get('/hello-world', async (request, reply) => {
     return 'Hello, world!';

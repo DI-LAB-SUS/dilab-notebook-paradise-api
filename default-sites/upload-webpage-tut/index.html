@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>上傳網站筆記教學</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>上傳網站筆記教學</h1>
+  </header>
+
+  <nav id="toc">
+    <ul>
+      <li><a href="#introduction">介紹</a></li>
+      <li><a href="#project">專案結構</a></li>
+      <li><a href="#zip">壓縮檔準備</a></li>
+      <li><a href="#upload">上傳流程</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="introduction">
+      <h2>介紹</h2>
+      <p>使用者可以用網頁前端技術（HTML, CSS, JS）設計筆記。</p>
+      <p>（也可以用 React, Vue, Angular 等，只要輸出成有 index.html 的前端就可以）。</p>
+      <p>這份教學筆記也是同樣的筆記架構做出來的。</p>
+    </section>
+
+    <section id="project">
+      <h2>準備前端專案</h2>
+      <p>首先，假設你有個前端專案，如下：</p>
+      <figure>
+        <img src="./imgs/webpage-folder.png" alt="Webpage Folder">
+        <figcaption>專案資料夾結構</figcaption>
+      </figure>
+    </section>
+
+    <section id="zip">
+      <h2>建立 Zip 壓縮檔</h2>
+      <p>將此專案壓縮成 Zip 壓縮檔（index.html 應該要顯示在壓縮檔裡最外層，請不要多一層資料夾），如下：</p>
+      <figure>
+        <img src="./imgs/webpage-zip.png" alt="Webpage Zip">
+        <figcaption>Zip 壓縮檔結構</figcaption>
+      </figure>
+    </section>
+
+    <section id="upload">
+      <h2>上傳筆記</h2>
+      <p>接下來就要來做上傳動作了！</p>
+      <p>請按下上傳按鈕：</p>
+      <figure>
+        <img src="./imgs/upload_link.png" alt="Upload Link">
+        <figcaption>上傳按鈕</figcaption>
+      </figure>
+      <p>填入相關的所有資料：</p>
+      <ul>
+        <li>筆記標題：會顯示在圖書館或主頁面的筆記大 title。</li>
+        <li>筆記描述：同樣會顯示在圖書館或主頁面上的筆記描述。</li>
+      </ul>
+      <figure>
+        <img src="./imgs/upload_form.png" alt="Upload Form">
+        <figcaption>上傳表單</figcaption>
+      </figure>
+      <p>完成後，筆記就會出現在圖書館或主頁面上！</p>
+      <figure>
+        <img src="./imgs/newest-uploads.png" alt="Newest Uploads">
+        <figcaption>最新上傳筆記</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 上傳網站筆記教學</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

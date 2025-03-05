@@ -10,6 +10,19 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+/**
+ * For providing typing context of the manually registered members into the Fastify Instance.
+ */
+declare module 'fastify' {
+    interface FastifyInstance {
+        githubOAuth2: {
+            generateAuthorizationUri: () => string;
+            getAccessTokenFromAuthorizationCodeFlow: (arg0: FastifyRequest) => any;
+        },
+        authenticate: (request: FastifyRequest, reply: FastifyReply) => Promise<void>;
+    }
+}
+
 export default async function authRoutes(fastify: FastifyInstance, options: any) {
     fastify.get('/login/github-callback', async (request, reply) => {
         const FRONT_APP_BASE_URL = process.env.FRONT_APP_BASE_URL!;
