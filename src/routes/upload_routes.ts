@@ -140,7 +140,7 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
 
             // Save upload metadata to database for GitHub users.
             if (userFromDB.github_id) {
-                await supabase.from('dilab_user_upload_notes')
+                const result = await supabase.from('dilab_user_upload_notes')
                     .insert({
                         "owner_acc_type": "github",
                         "owner_id": userFromDB.github_id,
@@ -149,9 +149,10 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
                         "description": desc,
                         "directory": timestamp
                     })
+                if (result.error) {
+                    throw new Error(result.error.message);
+                }
             }
-
-
         } catch (error) {
             console.error(error);
             reply.status(500).send({success: false, message: "Failed to upload."});
