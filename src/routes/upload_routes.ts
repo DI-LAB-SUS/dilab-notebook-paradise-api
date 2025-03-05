@@ -78,20 +78,13 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
      * POST route to handle webpage note uploads.
      */
     fastify.post('/webpage-note', async (request, reply) => {
-        // const formData = await request.formData();
-        // console.log(formData);
-        const parts = request.parts()
-        for await (const part of parts) {
-            console.log(part);
-            if (part.type === 'file') {
-                pipeline(part.file, fs.createWriteStream(part.filename))
-            } else {
-                // part.type === 'field
-                console.log(part)
-            }
-        }
-        // reply.send()
+        const formData = await request.formData();
 
+        const title = formData.get('title');
+        const desc = formData.get('desc');
+
+        console.log(title);
+        console.log(desc);
 
         // // Validate that the main file was provided.
         // if (!filePart) {

@@ -33,14 +33,17 @@ fastify.register(fastifyStatic, {
 fastify.register(fastifyMultipart , {  // Register fastify-multipart for parsing form data.
     limits: {
         fieldNameSize: 100, // Max field name size in bytes
-        fieldSize: 1000000000000000,     // Max field value size in bytes
+        fieldSize: 500000,     // Max field value size in bytes
         fields: 10,         // Max number of non-file fields
-        fileSize: 10000000000000,  // For multipart forms, the max file size in bytes
+        fileSize: 50000000,  // For multipart forms, the max file size in bytes
         files: 5,           // Max number of file fields
         headerPairs: 2000,  // Max number of header key=>value pairs
         parts: 1000         // For multipart forms, the max number of parts (fields + files)
     },
-    // attachFieldsToBody: true
+    /**
+     * Simplifies the form data parsing workflow, can now use await request.formData() to directly access files and fields.
+     */
+    attachFieldsToBody: true
 });
 
 fastify.register(fastifyCookie); // Register Cookie Plugin

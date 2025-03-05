@@ -4,7 +4,7 @@ Link to the issue: https://github.com/fastify/fastify-multipart/issues/569
 
 ## MRE (Minimal Reproducible Example) Repo
 
-Link to the MRE: https://github.com/TempleLin/fastifymultipart-formdata-parts-notsync-bugreport
+Link to the MRE: https://github.com/TempleLin/fastifymultipart-formdata-parts-notsync-issue.git
 
 ## Description
 
