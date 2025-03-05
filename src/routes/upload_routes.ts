@@ -3,6 +3,7 @@ import fastifyMultipart, {Multipart, MultipartValue} from '@fastify/multipart';
 import * as fs from "node:fs";
 import path from "node:path";
 import {supabase} from "../global/supabase_client";
+import {pipeline} from "node:stream";
 
 // declare module 'fastify' {
 //     interface FastifyReply {
@@ -16,9 +17,6 @@ import {supabase} from "../global/supabase_client";
 
 
 export default async function uploadRoutes(fastify: FastifyInstance, options: any) {
-    // Register fastify-multipart if not registered globally.
-    fastify.register(fastifyMultipart);
-
     /**
      * Helper function to check allowed file extensions.
      * @param filename
@@ -80,26 +78,20 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
      * POST route to handle webpage note uploads.
      */
     fastify.post('/webpage-note', async (request, reply) => {
-        // Use the multipart iterator to process both file parts and form fields.
-        const parts = request.parts();
-        let filePart: Multipart | undefined;
-        let imagePart: Multipart | undefined;
-        const fields: Record<string, string> = {};
-
+        // const formData = await request.formData();
+        // console.log(formData);
+        const parts = request.parts()
         for await (const part of parts) {
-            if (part.type == 'file') {
-                if (part.fieldname === 'file') {
-                    filePart = part;
-                } else if (part.fieldname === 'image') {
-                    imagePart = part;
-                }
+            console.log(part);
+            if (part.type === 'file') {
+                pipeline(part.file, fs.createWriteStream(part.filename))
             } else {
-                console.log('???')
-                // Capture non-file fields.
-                console.log(part);
-                // fields[part.fieldname] = part.value;
+                // part.type === 'field
+                console.log(part)
             }
         }
+        // reply.send()
+
 
         // // Validate that the main file was provided.
         // if (!filePart) {

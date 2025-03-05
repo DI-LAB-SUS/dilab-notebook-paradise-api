@@ -7,6 +7,7 @@ import {fastifyOauth2} from "@fastify/oauth2";
 import fastifyCors from "@fastify/cors";
 import fastifyRedis from "@fastify/redis";
 import fastifyStatic from "@fastify/static";
+import fastifyMultipart from "@fastify/multipart";
 import uploadRoutes from "./routes/upload_routes";
 import path from "node:path";
 
@@ -27,6 +28,19 @@ fastify.register(fastifyStatic, {
     root: path.join(__dirname, 'public'),
     prefix: '/', // optional: default '/'
     constraints: {  } // optional: default {}
+});
+
+fastify.register(fastifyMultipart , {  // Register fastify-multipart for parsing form data.
+    limits: {
+        fieldNameSize: 100, // Max field name size in bytes
+        fieldSize: 1000000000000000,     // Max field value size in bytes
+        fields: 10,         // Max number of non-file fields
+        fileSize: 10000000000000,  // For multipart forms, the max file size in bytes
+        files: 5,           // Max number of file fields
+        headerPairs: 2000,  // Max number of header key=>value pairs
+        parts: 1000         // For multipart forms, the max number of parts (fields + files)
+    },
+    // attachFieldsToBody: true
 });
 
 fastify.register(fastifyCookie); // Register Cookie Plugin
