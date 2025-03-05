@@ -127,6 +127,13 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
             const fileStream = Readable.from(Buffer.from(await file.arrayBuffer()));
             await pipelineAsync(fileStream, fs.createWriteStream(backupFilePath));
 
+            // Backup image as well if it exists.
+            if (image) {
+                const imageFilenameSecured = sanitizeFilename(image.name);
+                const backupImgFilePath = path.join(uploadTimestampBackupPath, imageFilenameSecured);
+                const imageFileStream = Readable.from(Buffer.from(await image.arrayBuffer()));
+                await pipelineAsync(imageFileStream, fs.createWriteStream(backupImgFilePath));
+            }
         } catch (error) {
             console.error(error);
             reply.status(500).send({success: false, message: "Failed to upload."});
