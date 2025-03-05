@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import sanitizeFilename from 'sanitize-filename';
 import { pipeline } from 'stream';
 import {PipelineSource, Readable} from "node:stream";
+import {getUserFromCache} from "../utils/auth_utils";
 
 
 const ALLOWED_COMPRESSION_EXTENSIONS = ['zip'];
@@ -47,7 +48,7 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
      * This system would have default sites used across documentations, and sites that are uploaded by users.
      * This must be in combination with the /default-sites/:site/* route below, so that both HTML and other assets can be sent.
      */
-    fastify.get('/default-sites/:site/', async (request, reply) => {
+    fastify.get('/default-sites/:site/', { preValidation: [fastify.authenticate] }, async (request, reply) => {
         const { site } = request.params as { site: string };
         const filename = 'index.html';
         const sitePath = path.join(process.cwd(), './default-sites', site);
@@ -61,7 +62,7 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
     /**
      * Route to serve static assets (CSS, JS, etc.) for a given default site.
      */
-    fastify.get('/default-sites/:site/*', async (request, reply) => {
+    fastify.get('/default-sites/:site/*', { preValidation: [fastify.authenticate] }, async (request, reply) => {
         const { site } = request.params as { site: string };
         // The wildcard parameter is available as a property named '*' in request.params.
         const filename = (request.params as any)['*'];
@@ -76,7 +77,7 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
     /**
      * POST route to handle webpage note uploads.
      */
-    fastify.post('/webpage-note', async (request, reply) => {
+    fastify.post('/webpage-note', { preValidation: [fastify.authenticate] }, async (request, reply) => {
         try {
             const formData = await request.formData();
 
@@ -134,6 +135,23 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
                 const imageFileStream = Readable.from(Buffer.from(await image.arrayBuffer()));
                 await pipelineAsync(imageFileStream, fs.createWriteStream(backupImgFilePath));
             }
+
+            const userFromDB = await getUserFromCache(fastify, (request.user as any).user_id);
+
+            // Save upload metadata to database for GitHub users.
+            if (userFromDB.github_id) {
+                await supabase.from('dilab_user_upload_notes')
+                    .insert({
+                        "owner_acc_type": "github",
+                        "owner_id": userFromDB.github_id,
+                        "owner_name": userFromDB.github_username,
+                        "title": title,
+                        "description": desc,
+                        "directory": timestamp
+                    })
+            }
+
+
         } catch (error) {
             console.error(error);
             reply.status(500).send({success: false, message: "Failed to upload."});

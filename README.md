@@ -55,3 +55,6 @@
 - 在 Supabase 建立 enum type 取代字串去儲存使用者的帳號類型（default, github）。
 - 確認避免使用者上傳的資料夾中有重複資料夾名。
 - 儲存檔案，不只到 backup 資料夾，也儲存 + 解壓縮到主要儲存夾。
+- 改變現在的使用者 Table 與資料結構，統一成一個 User Table 有多種不同登入方式的使用者。 
+- 使用 Enum 去儲存使用者類型（GitHub, Default etc.）。
+- 在 TypeScript 宣告 Supabase 中各 Table 的類別，提高資料的判別度。
