@@ -169,4 +169,16 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
 
         reply.send({message: '檔案上傳成功！'});
     });
+
+    fastify.get('/webpage-notes-list', {preValidation: [fastify.authenticate]}, async (request, reply) => {
+        const result = await supabase
+            .from('dilab_user_upload_notes')
+            .select();
+
+        reply.send(result);
+
+        if (result.error) {
+            reply.status(500).send({message: '筆記列表瀏覽失敗。'})
+        }
+    });
 }
