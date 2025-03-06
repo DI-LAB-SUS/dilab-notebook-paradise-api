@@ -173,7 +173,8 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
     fastify.get('/webpage-notes-list', {preValidation: [fastify.authenticate]}, async (request, reply) => {
         const result = await supabase
             .from('dilab_user_upload_notes')
-            .select();
+            .select()
+            .order('id', {ascending: false});
 
         reply.send(result);
 
