@@ -58,3 +58,4 @@
 - 改變現在的使用者 Table 與資料結構，統一成一個 User Table 有多種不同登入方式的使用者。 
 - 使用 Enum 去儲存使用者類型（GitHub, Default etc.）。
 - 在 TypeScript 宣告 Supabase 中各 Table 的類別，提高資料的判別度。
+- 現在每次接收新上傳的筆記都會重複額外存一份備份的，等同於做了兩次。以後看有什麼更好的做法。
