@@ -31,19 +31,6 @@ export default async function uploadRoutes(fastify: FastifyInstance, options: an
     }
 
     /**
-     * Decorate the reply object with a sendFile helper.
-     */
-    // fastify.decorateReply('sendFile', function (this: FastifyReply, filePath: string) {
-    //     console.log(`Sending file: ${filePath}`);
-    //     const bufferFile = fs.readFileSync(filePath);
-    //     // const stream = fs.createReadStream(filePath);
-    //     // stream.on('error', (err: any) => {
-    //     //     this.code(404).send('File not found');
-    //     // });
-    //     return this.send(bufferFile);
-    // });
-
-    /**
      * Route to serve the default site's index.html.
      * This system would have default sites used across documentations, and sites that are uploaded by users.
      * This must be in combination with the /default-sites/:site/* route below, so that both HTML and other assets can be sent.
